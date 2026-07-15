@@ -12,7 +12,8 @@ namespace Craft{
 	class Win32Window
 	{
 	public:
-		Win32Window(uint32_t _width = 1280, uint32_t _height = 720, HINSTANCE _inst = nullptr, WNDPROC _msgProc = nullptr);
+		Win32Window(uint32_t _width = 1280, uint32_t _height = 720, const wstring& _wstrTitle = L"",
+			HINSTANCE _inst = nullptr, WNDPROC _msgProc = nullptr);
 		~Win32Window();
 	public:
 		//init funcs

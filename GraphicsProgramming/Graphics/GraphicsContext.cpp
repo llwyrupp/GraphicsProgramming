@@ -1,5 +1,6 @@
 #include "../Graphics/GraphicsContext.h"
 #include "../Core/Win32Window.h"
+#include "../Common.h"
 
 namespace Craft {
 	GraphicsContext::GraphicsContext()
@@ -8,7 +9,7 @@ namespace Craft {
 	}
 	GraphicsContext::~GraphicsContext()
 	{
-		if (m_pDevice)
+		/*if (m_pDevice)
 		{
 			m_pDevice->Release();
 			m_pDevice = nullptr;
@@ -24,10 +25,28 @@ namespace Craft {
 		{
 			m_pSwapChain->Release();
 			m_pSwapChain = nullptr;
-		}
+		}*/
+		SafeRelease(m_pDevice);
+		SafeRelease(m_pDeviceContext);
+		SafeRelease(m_pSwapChain);
 	}
-	void GraphicsContext::Init(uint32_t _width, uint32_t _height, const Win32Window& _window)
+	void GraphicsContext::Init(const Win32Window& _window)
 	{
+		m_iHeight = _window.GetHeight();
+		m_iWidth = _window.GetWidth();
+
+		// 장치 생성.
+		CreateDevice();
+
+		// SwapChain 생성.
+		CreateSwapChain(_window);
+
+		// 뷰포트 생성.
+		CreateViewport(_window);
+	}
+	void GraphicsContext::CreateDevice()
+	{
+		
 		uint32_t flag = 0;
 
 #if _DEBUG
@@ -53,7 +72,9 @@ namespace Craft {
 			__debugbreak();
 			return;
 		}
-
+	}
+	void GraphicsContext::CreateSwapChain(const Win32Window& _window)
+	{
 		//create swapchain.
 		IDXGIFactory* pFactory = nullptr;
 		IDXGIAdapter* pAdapter = nullptr;
@@ -89,11 +110,12 @@ namespace Craft {
 			return;
 		}
 
-		if (pFactory) {
-			pFactory->Release();
-			pFactory = nullptr;
-		}
-
+		SafeRelease(pFactory);
+	}
+	void GraphicsContext::CreateViewport(const Win32Window& _window)
+	{
+		//뷰포트: 나눠서 사용가능
+		//
 		m_pViewPort.TopLeftX = 0.f;
 		m_pViewPort.TopLeftY = 0.f;
 		m_pViewPort.Width = static_cast<float>(_window.GetWidth());

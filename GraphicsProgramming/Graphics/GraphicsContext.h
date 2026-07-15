@@ -29,7 +29,11 @@ namespace Craft {
 		GraphicsContext();
 		~GraphicsContext();
 	public:
-		void Init(uint32_t _width, uint32_t _height, const Win32Window& _window);
+		void Init(const Win32Window& _window);
+	private:
+		void CreateDevice();
+		void CreateSwapChain(const Win32Window& _window);
+		void CreateViewport(const Win32Window& _window);
 	private:
 		// 장치류.
 		// Direct3D 리소스는 포인터로만 다룰 수 있음.

@@ -32,13 +32,13 @@ int main() {
 	//fill up struct needed for a new window
 	HINSTANCE hInstance = GetModuleHandle(nullptr);
 
-	Win32Window window(iClientWidth, iClientHeight, hInstance, WindowProc);
+	Win32Window window(iClientWidth, iClientHeight, wstrTitle, hInstance, WindowProc);
 	if (!window.Init())
 		return -1;
 
 	//test graphic device
 	GraphicsContext context;
-	context.Init(iClientWidth, iClientHeight, window);
+	context.Init(window);
 
 	//run the message loop.
 	MSG msg = {};

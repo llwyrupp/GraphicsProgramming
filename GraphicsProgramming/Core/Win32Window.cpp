@@ -2,8 +2,8 @@
 
 using namespace Craft;
 
-Win32Window::Win32Window(uint32_t _width, uint32_t _height, HINSTANCE _inst, WNDPROC _msgProc)
-	:m_iWidth(_width), m_iHeight(_height), m_hInstance(_inst), m_MsgProc(_msgProc)
+Win32Window::Win32Window(uint32_t _width, uint32_t _height, const wstring& _wstrTitle, HINSTANCE _inst, WNDPROC _msgProc)
+	:m_iWidth(_width), m_iHeight(_height),m_wstrTitle(_wstrTitle), m_hInstance(_inst), m_MsgProc(_msgProc)
 {
 
 }

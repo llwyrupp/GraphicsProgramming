@@ -32,5 +32,12 @@
     <ClInclude Include="Graphics\GraphicsContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ShaderFiles\VertexShader.hlsl" />
+    <FxCompile Include="ShaderFiles\PixelShader.hlsl" />
   </ItemGroup>
 </Project>
